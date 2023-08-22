@@ -27,6 +27,13 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'azlearn(39312d1c-b748-43c2-9778-9112f8e2e0a3)'
+    appType: 'webApp'
+    appName: 'nvhAppName'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
 
 - task: VSTest@2
   inputs:
